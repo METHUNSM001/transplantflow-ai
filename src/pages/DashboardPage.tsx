@@ -82,20 +82,20 @@ export const DashboardPage: React.FC = () => {
 
       {/* 3. Live Active Transit Map & Telemetry Bar */}
       {primaryTransport && (
-        <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 shadow-xl space-y-3">
+        <div className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <h4 className="text-sm font-bold text-white uppercase tracking-wide flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+              <h4 className="text-sm font-bold text-slate-900 tracking-tight flex items-center gap-2">
+                <span className="w-2.5 h-2.5 rounded-full bg-blue-600 animate-ping" />
                 Active Medevac Transit Telemetry
               </h4>
-              <p className="text-xs text-slate-400 mt-0.5">
+              <p className="text-xs text-slate-500 mt-0.5">
                 Monitoring high-priority transit corridor: {originHosp?.name} ➔ {destHosp?.name}
               </p>
             </div>
             <a
               href="/transports"
-              className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold transition"
+              className="text-xs text-blue-600 hover:text-blue-700 font-semibold transition"
             >
               All Transports
             </a>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Check, CheckCircle, Clock, CircleDot } from 'lucide-react';
+import { Check, CircleDot } from 'lucide-react';
 import { OrganStatus } from '../../types/database.types';
 
 interface OrganJourneyPipelineProps {
@@ -15,7 +15,7 @@ export const OrganJourneyPipeline: React.FC<OrganJourneyPipelineProps> = ({ stat
     { key: 'TRANSPLANTED', label: 'Transplantation', desc: 'Reperfusion complete' },
   ];
 
-  const getStepState = (stepKey: OrganStatus, index: number) => {
+  const getStepState = (stepKey: OrganStatus, _index: number) => {
     const order: OrganStatus[] = ['AVAILABLE', 'MATCHED', 'IN_TRANSIT', 'ARRIVED', 'TRANSPLANTED'];
     const currentIndex = order.indexOf(status);
     const stepIndex = order.indexOf(stepKey);
@@ -30,14 +30,14 @@ export const OrganJourneyPipeline: React.FC<OrganJourneyPipelineProps> = ({ stat
   };
 
   return (
-    <div className="bg-slate-900/90 rounded-xl p-4 sm:p-5 border border-slate-800 shadow-xl overflow-x-auto">
-      <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">
+    <div className="bg-white rounded-xl p-5 sm:p-6 border border-slate-200/90 shadow-sm overflow-x-auto">
+      <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-5">
         Transplant Digital Twin Journey
       </h4>
 
-      <div className="flex items-center min-w-[620px] justify-between relative">
+      <div className="flex items-center min-w-[620px] justify-between relative px-4">
         {/* Connecting line */}
-        <div className="absolute top-4 left-6 right-6 h-0.5 bg-slate-800 -z-0" />
+        <div className="absolute top-4 left-10 right-10 h-0.5 bg-slate-200 -z-0" />
 
         {steps.map((step, idx) => {
           const state = getStepState(step.key, idx);
@@ -47,10 +47,10 @@ export const OrganJourneyPipeline: React.FC<OrganJourneyPipelineProps> = ({ stat
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all ${
                   state === 'completed'
-                    ? 'bg-cyan-500 border-cyan-400 text-slate-950 font-bold shadow-md shadow-cyan-900/40'
+                    ? 'bg-blue-600 border-blue-600 text-white font-bold shadow-sm'
                     : state === 'active'
-                    ? 'bg-slate-900 border-cyan-400 text-cyan-400 ring-4 ring-cyan-500/20 animate-pulse'
-                    : 'bg-slate-950 border-slate-700 text-slate-400'
+                    ? 'bg-white border-blue-600 text-blue-600 ring-4 ring-blue-100 font-bold'
+                    : 'bg-slate-100 border-slate-300 text-slate-400 font-medium'
                 }`}
               >
                 {state === 'completed' ? (
@@ -63,17 +63,17 @@ export const OrganJourneyPipeline: React.FC<OrganJourneyPipelineProps> = ({ stat
               </div>
 
               <span
-                className={`mt-2 text-xs font-bold ${
+                className={`mt-2.5 text-xs font-bold ${
                   state === 'active'
-                    ? 'text-cyan-400'
+                    ? 'text-blue-600'
                     : state === 'completed'
-                    ? 'text-slate-200'
-                    : 'text-slate-400'
+                    ? 'text-slate-900'
+                    : 'text-slate-500'
                 }`}
               >
                 {step.label}
               </span>
-              <span className="text-[10px] text-slate-400 leading-tight mt-0.5">
+              <span className="text-[11px] text-slate-500 leading-tight mt-0.5 font-medium">
                 {step.desc}
               </span>
             </div>

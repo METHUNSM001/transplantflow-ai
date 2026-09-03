@@ -75,25 +75,25 @@ export const OrgansPage: React.FC = () => {
       {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
-            <Layers className="w-6 h-6 text-cyan-400" />
+          <h2 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+            <Layers className="w-6 h-6 text-blue-600" />
             Organ Inventory & Preservation Registry
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Real-time cold-ischemia telemetry, destination hospital coordination, and risk scoring.
           </p>
         </div>
 
         <button
           onClick={() => setIsCreateModalOpen(true)}
-          className="px-4 py-2 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-cyan-950/40 transition"
+          className="px-4 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs flex items-center gap-2 shadow-sm transition"
         >
           <Plus className="w-4 h-4" /> Register New Organ
         </button>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-slate-900/90 p-4 rounded-xl border border-slate-800 flex flex-col md:flex-row items-center justify-between gap-3">
+      <div className="bg-white p-4 rounded-xl border border-slate-200/90 shadow-sm flex flex-col md:flex-row items-center justify-between gap-3">
         {/* Search */}
         <div className="relative w-full md:w-72">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
@@ -102,20 +102,20 @@ export const OrgansPage: React.FC = () => {
             placeholder="Search organ type, blood group, ID..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+            className="w-full pl-9 pr-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:bg-white transition"
           />
         </div>
 
         {/* Dropdowns */}
         <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
-          <div className="flex items-center gap-1.5 text-xs text-slate-400">
-            <Filter className="w-3.5 h-3.5" /> Filter:
+          <div className="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+            <Filter className="w-3.5 h-3.5 text-slate-400" /> Filter:
           </div>
 
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 focus:outline-none"
+            className="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 font-medium focus:outline-none cursor-pointer"
           >
             <option value="ALL">All Statuses</option>
             <option value="AVAILABLE">Available</option>
@@ -128,7 +128,7 @@ export const OrgansPage: React.FC = () => {
           <select
             value={typeFilter}
             onChange={(e) => setTypeFilter(e.target.value)}
-            className="px-2.5 py-1.5 rounded-lg bg-slate-950 border border-slate-800 text-xs text-slate-300 focus:outline-none"
+            className="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-700 font-medium focus:outline-none cursor-pointer"
           >
             <option value="ALL">All Organs</option>
             <option value="Heart">Heart</option>
@@ -141,10 +141,10 @@ export const OrgansPage: React.FC = () => {
       </div>
 
       {/* Organs Table */}
-      <div className="bg-slate-900/90 rounded-xl border border-slate-800 shadow-xl overflow-hidden">
+      <div className="bg-white rounded-xl border border-slate-200/90 shadow-sm overflow-hidden">
         <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-slate-950 text-slate-400 uppercase text-[10px] tracking-wider border-b border-slate-800">
+          <table className="w-full text-left text-xs text-slate-700">
+            <thead className="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold tracking-wider border-b border-slate-200">
               <tr>
                 <th className="py-3.5 px-4">Organ & ID</th>
                 <th className="py-3.5 px-4">Blood Group</th>
@@ -157,7 +157,7 @@ export const OrgansPage: React.FC = () => {
                 <th className="py-3.5 px-4 text-right">Action</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/80">
+            <tbody className="divide-y divide-slate-100">
               {filteredOrgans.length === 0 ? (
                 <tr>
                   <td colSpan={9} className="py-8 text-center text-slate-400 text-xs">
@@ -192,67 +192,67 @@ export const OrgansPage: React.FC = () => {
                   return (
                     <tr
                       key={organ.id}
-                      className="hover:bg-slate-800/40 transition-colors cursor-pointer"
+                      className="hover:bg-blue-50/30 transition-colors"
                     >
-                      <td className="py-3 px-4">
-                        <div className="flex items-center gap-2.5">
+                      <td className="py-3.5 px-4">
+                        <div className="flex items-center gap-3">
                           <span className="text-xl">{ORGAN_ICONS[organ.organ_type] || '🧬'}</span>
                           <div>
-                            <span className="font-bold text-white text-sm">{organ.organ_type}</span>
-                            <span className="block text-[10px] font-mono text-slate-400">
+                            <span className="font-bold text-slate-900 text-sm">{organ.organ_type}</span>
+                            <span className="block text-[11px] font-mono text-slate-400">
                               {organ.id.substring(0, 14)}...
                             </span>
                           </div>
                         </div>
                       </td>
 
-                      <td className="py-3 px-4 font-mono font-bold text-slate-200">
+                      <td className="py-3.5 px-4 font-mono font-bold text-slate-800">
                         {organ.blood_group}
                       </td>
 
-                      <td className="py-3 px-4">
+                      <td className="py-3.5 px-4">
                         <StatusBadge type="status" value={organ.status} />
                       </td>
 
-                      <td className="py-3 px-4 font-mono">
-                        <span className="font-bold text-white text-sm block">
+                      <td className="py-3.5 px-4 font-mono">
+                        <span className="font-bold text-slate-900 text-sm block">
                           {pres.formattedRemaining}
                         </span>
-                        <span className="text-[10px] text-slate-400">
+                        <span className="text-[10px] text-slate-500 font-medium">
                           {pres.percentageUsed}% used
                         </span>
                       </td>
 
-                      <td className="py-3 px-4 font-medium text-slate-200">
+                      <td className="py-3.5 px-4 font-medium text-slate-800">
                         {destHospital ? destHospital.name : 'Unassigned'}
                       </td>
 
-                      <td className="py-3 px-4 font-mono">
+                      <td className="py-3.5 px-4 font-mono text-slate-700">
                         {transport ? `${etaMins} mins` : '—'}
                       </td>
 
-                      <td className="py-3 px-4 font-mono font-bold">
+                      <td className="py-3.5 px-4 font-mono font-bold">
                         <span
                           className={
                             pres.safetyMarginMinutes >= 30
-                              ? 'text-emerald-400'
+                              ? 'text-emerald-700'
                               : pres.safetyMarginMinutes >= 10
-                              ? 'text-amber-400'
-                              : 'text-rose-400'
+                              ? 'text-amber-700'
+                              : 'text-red-600'
                           }
                         >
                           {pres.safetyMarginMinutes > 0 ? `+${pres.safetyMarginMinutes}m` : `${pres.safetyMarginMinutes}m`}
                         </span>
                       </td>
 
-                      <td className="py-3 px-4">
+                      <td className="py-3.5 px-4">
                         <StatusBadge type="risk" value={risk.level} />
                       </td>
 
-                      <td className="py-3 px-4 text-right">
+                      <td className="py-3.5 px-4 text-right">
                         <Link
                           to={`/organs/${organ.id}`}
-                          className="inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-slate-800 hover:bg-cyan-600 hover:text-white text-cyan-300 font-semibold transition"
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-blue-50 hover:bg-blue-600 hover:text-white text-blue-700 font-semibold text-xs transition border border-blue-200"
                         >
                           Digital Twin <ArrowRight className="w-3.5 h-3.5" />
                         </Link>
@@ -268,23 +268,23 @@ export const OrgansPage: React.FC = () => {
 
       {/* Register New Organ Modal */}
       {isCreateModalOpen && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4">
-            <h3 className="text-base font-bold text-white uppercase tracking-wide flex items-center gap-2">
-              <Plus className="w-5 h-5 text-cyan-400" />
+        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-white border border-slate-200 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4">
+            <h3 className="text-base font-bold text-slate-900 tracking-tight flex items-center gap-2">
+              <Plus className="w-5 h-5 text-blue-600" />
               Register Retrieved Organ
             </h3>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500">
               Initializes a new clinical digital twin with automated cold-ischemia countdown.
             </p>
 
-            <form onSubmit={handleCreateOrgan} className="space-y-3.5 text-xs">
+            <form onSubmit={handleCreateOrgan} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-300 font-medium mb-1">Organ Type</label>
+                <label className="block text-slate-700 font-semibold mb-1">Organ Type</label>
                 <select
                   value={newOrganType}
                   onChange={(e) => setNewOrganType(e.target.value as OrganType)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-slate-800 focus:outline-none focus:border-blue-500"
                 >
                   <option value="Heart">Heart (Max 4 hrs / 240 mins)</option>
                   <option value="Lung">Lung (Max 6 hrs / 360 mins)</option>
@@ -295,11 +295,11 @@ export const OrgansPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-slate-300 font-medium mb-1">Donor Blood Group</label>
+                <label className="block text-slate-700 font-semibold mb-1">Donor Blood Group</label>
                 <select
                   value={newBloodGroup}
                   onChange={(e) => setNewBloodGroup(e.target.value as BloodGroup)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none font-mono"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-slate-800 focus:outline-none font-mono focus:border-blue-500"
                 >
                   <option value="O+">O+ (Rh-positive universal)</option>
                   <option value="O-">O- (Universal donor)</option>
@@ -313,11 +313,11 @@ export const OrgansPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-slate-300 font-medium mb-1">Clinical Priority</label>
+                <label className="block text-slate-700 font-semibold mb-1">Clinical Priority</label>
                 <select
                   value={newPriority}
                   onChange={(e) => setNewPriority(e.target.value as PriorityLevel)}
-                  className="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-800 text-white focus:outline-none"
+                  className="w-full px-3 py-2 rounded-lg bg-slate-50 border border-slate-200 text-slate-800 focus:outline-none focus:border-blue-500"
                 >
                   <option value="URGENT">Urgent Allocation</option>
                   <option value="CRITICAL_RESCUE">Critical Rescue Allocation</option>
@@ -325,17 +325,17 @@ export const OrgansPage: React.FC = () => {
                 </select>
               </div>
 
-              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-800">
+              <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => setIsCreateModalOpen(false)}
-                  className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium"
+                  className="px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white font-bold"
+                  className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-sm"
                 >
                   Start Twin & Clock
                 </button>

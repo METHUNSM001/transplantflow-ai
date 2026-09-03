@@ -24,17 +24,17 @@ export const MatchingCriteriaWeightControls: React.FC<MatchingCriteriaWeightCont
   };
 
   return (
-    <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 shadow-xl space-y-4">
+    <div className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-sm space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Sliders className="w-5 h-5 text-purple-400" />
-          <h4 className="text-sm font-bold text-slate-100 uppercase tracking-wide">
+          <Sliders className="w-5 h-5 text-blue-600" />
+          <h4 className="text-sm font-bold text-slate-900 tracking-tight">
             Matching Criteria Weight Configuration
           </h4>
         </div>
         <button
           onClick={handleReset}
-          className="text-xs text-slate-400 hover:text-purple-300 flex items-center gap-1 transition"
+          className="text-xs text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1 transition"
         >
           <RotateCcw className="w-3.5 h-3.5" /> Reset Default
         </button>
@@ -42,10 +42,10 @@ export const MatchingCriteriaWeightControls: React.FC<MatchingCriteriaWeightCont
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
         {/* Compatibility */}
-        <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-2">
-          <div className="flex justify-between text-xs">
-            <span className="font-semibold text-slate-300">Compatibility</span>
-            <span className="font-mono text-purple-400 font-bold">
+        <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 space-y-2">
+          <div className="flex justify-between text-xs font-semibold">
+            <span className="text-slate-700">ABO Compatibility</span>
+            <span className="font-mono text-blue-700 font-bold">
               {Math.round(weights.compatibilityWeight * 100)}%
             </span>
           </div>
@@ -55,15 +55,15 @@ export const MatchingCriteriaWeightControls: React.FC<MatchingCriteriaWeightCont
             max="70"
             value={Math.round(weights.compatibilityWeight * 100)}
             onChange={(e) => handleSlider('compatibilityWeight', Number(e.target.value))}
-            className="w-full accent-purple-500 h-1.5 bg-slate-800 rounded cursor-pointer"
+            className="w-full accent-blue-600 h-1.5 bg-slate-200 rounded cursor-pointer"
           />
         </div>
 
         {/* Urgency */}
-        <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-2">
-          <div className="flex justify-between text-xs">
-            <span className="font-semibold text-slate-300">Clinical Urgency</span>
-            <span className="font-mono text-purple-400 font-bold">
+        <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 space-y-2">
+          <div className="flex justify-between text-xs font-semibold">
+            <span className="text-slate-700">Clinical Urgency</span>
+            <span className="font-mono text-blue-700 font-bold">
               {Math.round(weights.urgencyWeight * 100)}%
             </span>
           </div>
@@ -73,15 +73,15 @@ export const MatchingCriteriaWeightControls: React.FC<MatchingCriteriaWeightCont
             max="60"
             value={Math.round(weights.urgencyWeight * 100)}
             onChange={(e) => handleSlider('urgencyWeight', Number(e.target.value))}
-            className="w-full accent-purple-500 h-1.5 bg-slate-800 rounded cursor-pointer"
+            className="w-full accent-blue-600 h-1.5 bg-slate-200 rounded cursor-pointer"
           />
         </div>
 
         {/* Feasibility */}
-        <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-2">
-          <div className="flex justify-between text-xs">
-            <span className="font-semibold text-slate-300">Time Feasibility</span>
-            <span className="font-mono text-purple-400 font-bold">
+        <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 space-y-2">
+          <div className="flex justify-between text-xs font-semibold">
+            <span className="text-slate-700">Time Feasibility</span>
+            <span className="font-mono text-blue-700 font-bold">
               {Math.round(weights.timeFeasibilityWeight * 100)}%
             </span>
           </div>
@@ -91,15 +91,15 @@ export const MatchingCriteriaWeightControls: React.FC<MatchingCriteriaWeightCont
             max="60"
             value={Math.round(weights.timeFeasibilityWeight * 100)}
             onChange={(e) => handleSlider('timeFeasibilityWeight', Number(e.target.value))}
-            className="w-full accent-purple-500 h-1.5 bg-slate-800 rounded cursor-pointer"
+            className="w-full accent-blue-600 h-1.5 bg-slate-200 rounded cursor-pointer"
           />
         </div>
 
         {/* Distance */}
-        <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-2">
-          <div className="flex justify-between text-xs">
-            <span className="font-semibold text-slate-300">Proximity</span>
-            <span className="font-mono text-purple-400 font-bold">
+        <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 space-y-2">
+          <div className="flex justify-between text-xs font-semibold">
+            <span className="text-slate-700">Geographic Proximity</span>
+            <span className="font-mono text-blue-700 font-bold">
               {Math.round(weights.distanceWeight * 100)}%
             </span>
           </div>
@@ -109,15 +109,15 @@ export const MatchingCriteriaWeightControls: React.FC<MatchingCriteriaWeightCont
             max="40"
             value={Math.round(weights.distanceWeight * 100)}
             onChange={(e) => handleSlider('distanceWeight', Number(e.target.value))}
-            className="w-full accent-purple-500 h-1.5 bg-slate-800 rounded cursor-pointer"
+            className="w-full accent-blue-600 h-1.5 bg-slate-200 rounded cursor-pointer"
           />
         </div>
 
         {/* Waiting time */}
-        <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800 space-y-2">
-          <div className="flex justify-between text-xs">
-            <span className="font-semibold text-slate-300">Waitlist Time</span>
-            <span className="font-mono text-purple-400 font-bold">
+        <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200/80 space-y-2">
+          <div className="flex justify-between text-xs font-semibold">
+            <span className="text-slate-700">Waitlist Time</span>
+            <span className="font-mono text-blue-700 font-bold">
               {Math.round(weights.waitingTimeWeight * 100)}%
             </span>
           </div>
@@ -127,7 +127,7 @@ export const MatchingCriteriaWeightControls: React.FC<MatchingCriteriaWeightCont
             max="40"
             value={Math.round(weights.waitingTimeWeight * 100)}
             onChange={(e) => handleSlider('waitingTimeWeight', Number(e.target.value))}
-            className="w-full accent-purple-500 h-1.5 bg-slate-800 rounded cursor-pointer"
+            className="w-full accent-blue-600 h-1.5 bg-slate-200 rounded cursor-pointer"
           />
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, CheckCircle, CheckCircle2, ChevronRight, HelpCircle, X } from 'lucide-react';
+import { CheckCircle2, X } from 'lucide-react';
 import { CandidateMatchResult } from '../../types/engine.types';
 import { StatusBadge } from '../common/StatusBadge';
 
@@ -21,35 +21,35 @@ export const MatchExplanationDrawer: React.FC<MatchExplanationDrawerProps> = ({
   ];
 
   return (
-    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex justify-end">
-      <div className="w-full max-w-lg bg-slate-900 border-l border-slate-800 p-6 h-full overflow-y-auto flex flex-col justify-between shadow-2xl">
+    <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex justify-end">
+      <div className="w-full max-w-lg bg-white border-l border-slate-200 p-6 h-full overflow-y-auto flex flex-col justify-between shadow-2xl">
         <div className="space-y-6">
           {/* Header */}
-          <div className="flex items-start justify-between pb-4 border-b border-slate-800">
+          <div className="flex items-start justify-between pb-4 border-b border-slate-100">
             <div>
-              <span className="text-[10px] font-bold text-purple-400 uppercase tracking-wider block">
+              <span className="text-[11px] font-bold text-blue-600 uppercase tracking-wider block">
                 Candidate Score Audit
               </span>
-              <h3 className="text-xl font-bold text-white flex items-center gap-2">
+              <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
                 {candidate.recipientReference}
               </h3>
-              <p className="text-xs text-slate-400 mt-0.5">{candidate.hospitalName}</p>
+              <p className="text-xs text-slate-500 mt-0.5">{candidate.hospitalName}</p>
             </div>
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Overall Score Banner */}
-          <div className="p-4 rounded-xl bg-purple-950/30 border border-purple-500/30 flex items-center justify-between">
+          <div className="p-5 rounded-xl bg-blue-50/70 border border-blue-100 flex items-center justify-between">
             <div>
-              <span className="text-xs font-semibold text-purple-300 uppercase tracking-wider block">
+              <span className="text-xs font-bold text-blue-900 uppercase tracking-wider block">
                 Overall Feasibility Score
               </span>
-              <span className="text-3xl font-black font-mono text-purple-200">
+              <span className="text-3xl font-black font-mono text-blue-700">
                 {candidate.overallScore}%
               </span>
             </div>
@@ -58,19 +58,19 @@ export const MatchExplanationDrawer: React.FC<MatchExplanationDrawerProps> = ({
 
           {/* Weighted Breakdown */}
           <div className="space-y-3">
-            <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
               Scoring Formula Decomposition
             </h4>
             <div className="space-y-2.5">
               {criteria.map((c) => (
-                <div key={c.label} className="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80">
-                  <div className="flex justify-between text-xs mb-1">
-                    <span className="font-semibold text-slate-200">{c.label}</span>
-                    <span className="font-mono text-purple-300 font-bold">{c.score}/100</span>
+                <div key={c.label} className="bg-slate-50 p-3.5 rounded-lg border border-slate-200/80">
+                  <div className="flex justify-between text-xs mb-1 font-medium">
+                    <span className="text-slate-800">{c.label}</span>
+                    <span className="font-mono text-blue-700 font-bold">{c.score}/100</span>
                   </div>
-                  <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                  <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
                     <div
-                      className="bg-purple-500 h-full rounded-full"
+                      className="bg-blue-600 h-full rounded-full"
                       style={{ width: `${c.score}%` }}
                     />
                   </div>
@@ -81,13 +81,13 @@ export const MatchExplanationDrawer: React.FC<MatchExplanationDrawerProps> = ({
 
           {/* Clinical Reasons List */}
           <div className="space-y-2">
-            <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wider">
               Qualitative Audit Rationale
             </h4>
-            <ul className="space-y-2 text-xs text-slate-300">
+            <ul className="space-y-2 text-xs text-slate-700">
               {candidate.reasons.map((r, i) => (
-                <li key={i} className="flex items-start gap-2 bg-slate-950/40 p-2.5 rounded-lg border border-slate-800/40">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                <li key={i} className="flex items-start gap-2 bg-slate-50 p-3 rounded-lg border border-slate-200/80">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <span>{r}</span>
                 </li>
               ))}
@@ -96,10 +96,10 @@ export const MatchExplanationDrawer: React.FC<MatchExplanationDrawerProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-6 border-t border-slate-800">
+        <div className="pt-6 border-t border-slate-100">
           <button
             onClick={onClose}
-            className="w-full py-2.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition"
+            className="w-full py-2.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition"
           >
             Close Audit Breakdown
           </button>

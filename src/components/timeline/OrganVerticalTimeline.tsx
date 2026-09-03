@@ -9,7 +9,7 @@ interface OrganVerticalTimelineProps {
 export const OrganVerticalTimeline: React.FC<OrganVerticalTimelineProps> = ({ events }) => {
   if (events.length === 0) {
     return (
-      <div className="bg-slate-900/80 rounded-xl p-6 border border-slate-800 text-center text-slate-400 text-xs">
+      <div className="bg-white rounded-xl p-6 border border-slate-200 text-center text-slate-500 text-xs shadow-sm">
         No timeline milestones recorded for this organ yet.
       </div>
     );
@@ -19,29 +19,29 @@ export const OrganVerticalTimeline: React.FC<OrganVerticalTimelineProps> = ({ ev
     switch (type) {
       case 'RETRIEVAL':
       case 'PRESERVATION_START':
-        return <Clock className="w-3.5 h-3.5 text-cyan-400" />;
+        return <Clock className="w-3.5 h-3.5 text-blue-600" />;
       case 'MATCH_CONFIRMED':
-        return <CheckCircle2 className="w-3.5 h-3.5 text-purple-400" />;
+        return <CheckCircle2 className="w-3.5 h-3.5 text-indigo-600" />;
       case 'TRANSPORT_DEPARTED':
-        return <Navigation className="w-3.5 h-3.5 text-blue-400" />;
+        return <Navigation className="w-3.5 h-3.5 text-blue-600" />;
       case 'WEATHER_DELAY':
       case 'TRAFFIC_DELAY':
-        return <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />;
+        return <AlertTriangle className="w-3.5 h-3.5 text-red-600" />;
       case 'HOSPITAL_READY':
-        return <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />;
+        return <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />;
       default:
-        return <GitCommit className="w-3.5 h-3.5 text-slate-400" />;
+        return <GitCommit className="w-3.5 h-3.5 text-slate-500" />;
     }
   };
 
   return (
-    <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 shadow-xl">
-      <h4 className="text-xs font-semibold text-slate-300 uppercase tracking-wider mb-4 flex items-center gap-2">
-        <Clock className="w-4 h-4 text-cyan-400" />
+    <div className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-sm">
+      <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-5 flex items-center gap-2">
+        <Clock className="w-4 h-4 text-blue-600" />
         Chronological Milestone Audit Log
       </h4>
 
-      <div className="relative pl-6 space-y-6 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-800">
+      <div className="relative pl-6 space-y-5 before:absolute before:left-2.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-200">
         {events.map((event) => {
           const time = new Date(event.event_time);
           const timeFormatted = time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -50,25 +50,25 @@ export const OrganVerticalTimeline: React.FC<OrganVerticalTimelineProps> = ({ ev
           return (
             <div key={event.id} className="relative group">
               {/* Dot marker */}
-              <div className="absolute -left-6 top-0.5 w-5 h-5 rounded-full bg-slate-950 border border-slate-700 flex items-center justify-center shadow-md">
+              <div className="absolute -left-6 top-1 w-5 h-5 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center shadow-sm">
                 {getEventIcon(event.event_type)}
               </div>
 
               {/* Event card */}
-              <div className="bg-slate-950/60 p-3 rounded-lg border border-slate-800/80 hover:border-slate-700 transition">
+              <div className="bg-slate-50 p-3.5 rounded-lg border border-slate-200/80 hover:border-slate-300 transition shadow-2xs">
                 <div className="flex flex-wrap items-center justify-between gap-1 mb-1">
-                  <span className="text-xs font-bold text-slate-200">
+                  <span className="text-xs font-bold text-slate-900">
                     {event.event_type.replace(/_/g, ' ')}
                   </span>
-                  <span className="text-[10px] font-mono text-cyan-400">
+                  <span className="text-[11px] font-mono text-blue-700 font-semibold">
                     {timeFormatted} • {dateFormatted}
                   </span>
                 </div>
 
-                <p className="text-xs text-slate-300 mb-1">{event.description}</p>
+                <p className="text-xs text-slate-600 mb-1.5">{event.description}</p>
 
                 {event.location && (
-                  <span className="inline-block text-[10px] font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">
+                  <span className="inline-block text-[10px] font-mono text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200 font-medium">
                     📍 {event.location}
                   </span>
                 )}

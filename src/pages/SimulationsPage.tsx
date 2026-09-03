@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { ArrowRight, Clock, GitCompare, HelpCircle, ShieldAlert, Sliders } from 'lucide-react';
+import { Sliders } from 'lucide-react';
 import { RouteComparisonMatrix } from '../components/simulations/RouteComparisonMatrix';
 import { WhatIfDelaySimulator } from '../components/simulations/WhatIfDelaySimulator';
 import { simulateDelay } from '../engines/simulationEngine';
@@ -58,26 +58,26 @@ export const SimulationsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Header & Organ Selector */}
-      <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
-            <Sliders className="w-6 h-6 text-cyan-400" />
+          <h2 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+            <Sliders className="w-6 h-6 text-blue-600" />
             "What-If" Predictive Simulation Workbench
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Stress-test transit delays, meteorological holdovers, and secondary route scenarios
             against clinical preservation thresholds.
           </p>
         </div>
 
-        <div className="flex items-center gap-2">
-          <label className="text-xs text-slate-300 font-semibold whitespace-nowrap">
+        <div className="flex items-center gap-2.5">
+          <label className="text-xs text-slate-700 font-bold whitespace-nowrap">
             Target Organ:
           </label>
           <select
             value={selectedOrganId}
             onChange={(e) => setSelectedOrganId(e.target.value)}
-            className="px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white font-medium focus:outline-none focus:border-cyan-500"
+            className="px-3.5 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-800 font-semibold focus:outline-none focus:border-blue-500 cursor-pointer"
           >
             {organs.map((o) => (
               <option key={o.id} value={o.id}>
@@ -98,32 +98,34 @@ export const SimulationsPage: React.FC = () => {
       )}
 
       {/* Visual Delay Progression Chart (Recharts) */}
-      <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 shadow-xl space-y-4">
-        <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+      <div className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-sm space-y-4">
+        <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
           Delay Sensitivity Curve: Safety Margin vs Composite Risk
         </h4>
-        <p className="text-xs text-slate-400">
+        <p className="text-xs text-slate-500">
           Visualizes how incremental transit delays compress remaining preservation buffer and
-          exponentially elevate clinical operational risk.
+          elevate clinical operational risk.
         </p>
 
         <div className="h-72 w-full pt-2">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={chartData} margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
-              <XAxis dataKey="delay" stroke="#94a3b8" fontSize={11} />
-              <YAxis stroke="#94a3b8" fontSize={11} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" />
+              <XAxis dataKey="delay" stroke="#64748b" fontSize={11} fontStyle="bold" />
+              <YAxis stroke="#64748b" fontSize={11} fontStyle="bold" />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#0f172a',
-                  borderColor: '#334155',
-                  borderRadius: '0.5rem',
+                  backgroundColor: '#ffffff',
+                  borderColor: '#e2e8f0',
+                  borderRadius: '0.75rem',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
                   fontSize: '12px',
+                  color: '#0f172a',
                 }}
               />
               <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '8px' }} />
-              <Bar dataKey="safetyMargin" fill="#10b981" name="Safety Margin (Minutes)" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="riskScore" fill="#f43f5e" name="Predicted Risk Score (%)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="safetyMargin" fill="#059669" name="Safety Margin (Minutes)" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="riskScore" fill="#dc2626" name="Predicted Risk Score (%)" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

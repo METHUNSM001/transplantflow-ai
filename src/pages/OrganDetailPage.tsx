@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, Clock, Layers, MapPin, RefreshCw, ShieldAlert, Sparkles, User } from 'lucide-react';
+import { ArrowLeft, MapPin, RefreshCw, ShieldAlert } from 'lucide-react';
 import { StatusBadge } from '../components/common/StatusBadge';
 import { ColdIschemiaGauge } from '../components/digitalTwin/ColdIschemiaGauge';
 import { OrganJourneyPipeline } from '../components/digitalTwin/OrganJourneyPipeline';
@@ -20,9 +20,9 @@ export const OrganDetailPage: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="flex flex-col items-center gap-3 text-cyan-400">
+        <div className="flex flex-col items-center gap-3 text-blue-600">
           <RefreshCw className="w-8 h-8 animate-spin" />
-          <span className="text-xs font-mono">Loading Transplant Digital Twin Telemetry...</span>
+          <span className="text-xs font-mono font-medium">Loading Transplant Digital Twin Telemetry...</span>
         </div>
       </div>
     );
@@ -30,15 +30,15 @@ export const OrganDetailPage: React.FC = () => {
 
   if (!twin) {
     return (
-      <div className="bg-slate-900/80 rounded-2xl p-8 border border-slate-800 text-center space-y-4">
-        <ShieldAlert className="w-12 h-12 text-rose-400 mx-auto" />
-        <h3 className="text-lg font-bold text-white">Organ Digital Twin Not Found</h3>
-        <p className="text-xs text-slate-400">
+      <div className="bg-white rounded-2xl p-8 border border-slate-200 text-center space-y-4 shadow-sm">
+        <ShieldAlert className="w-12 h-12 text-red-600 mx-auto" />
+        <h3 className="text-lg font-bold text-slate-900">Organ Digital Twin Not Found</h3>
+        <p className="text-xs text-slate-500">
           The requested organ ID does not exist or has been archived from active registry.
         </p>
         <Link
           to="/organs"
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-slate-800 text-cyan-400 text-xs font-semibold hover:bg-slate-700"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-50 text-blue-700 text-xs font-semibold hover:bg-blue-100 border border-blue-200 transition"
         >
           <ArrowLeft className="w-4 h-4" /> Return to Organ Registry
         </Link>
@@ -68,7 +68,7 @@ export const OrganDetailPage: React.FC = () => {
         <div className="flex items-center gap-3">
           <Link
             to="/organs"
-            className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-white transition"
+            className="p-2.5 rounded-lg bg-white hover:bg-slate-50 border border-slate-200 text-slate-600 hover:text-slate-900 transition shadow-xs"
             title="Back to organs"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -76,12 +76,12 @@ export const OrganDetailPage: React.FC = () => {
           <div>
             <div className="flex items-center gap-2">
               <span className="text-2xl">{ORGAN_ICONS[organ.organ_type] || '🧬'}</span>
-              <h2 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
+              <h2 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
                 {organ.organ_type} Digital Twin
               </h2>
               <StatusBadge type="status" value={organ.status} />
             </div>
-            <p className="text-xs text-slate-400 font-mono mt-0.5">
+            <p className="text-xs text-slate-500 font-mono mt-0.5 font-medium">
               Twin ID: {organ.id} • ABO: <strong>{organ.blood_group}</strong> • Priority: {organ.priority}
             </p>
           </div>
@@ -90,13 +90,13 @@ export const OrganDetailPage: React.FC = () => {
         <div className="flex items-center gap-2">
           <Link
             to="/matching"
-            className="px-3.5 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs transition"
+            className="px-3.5 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold text-xs transition shadow-sm"
           >
             Candidate Matches
           </Link>
           <Link
             to="/simulations"
-            className="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-semibold text-xs border border-slate-700 transition"
+            className="px-3.5 py-2 rounded-lg bg-white hover:bg-slate-50 text-blue-700 font-semibold text-xs border border-slate-200 shadow-sm transition"
           >
             What-If Simulator
           </Link>
@@ -114,13 +114,13 @@ export const OrganDetailPage: React.FC = () => {
 
       {/* 3. Live React-Leaflet Map tracking transport */}
       {transport && (
-        <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 shadow-xl space-y-3">
+        <div className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
-            <h4 className="text-sm font-bold text-white uppercase tracking-wide flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-cyan-400" />
+            <h4 className="text-sm font-bold text-slate-900 tracking-tight flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-blue-600" />
               Real-Time Transport Telemetry & Map
             </h4>
-            <span className="text-xs text-slate-400 font-mono">
+            <span className="text-xs text-slate-500 font-mono font-medium">
               Vehicle: {transport.transport_mode}
             </span>
           </div>
@@ -144,7 +144,7 @@ export const OrganDetailPage: React.FC = () => {
             isInteractive={true}
           />
         ) : (
-          <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 text-center text-xs text-slate-400 py-12">
+          <div className="bg-white rounded-xl p-6 border border-slate-200 text-center text-xs text-slate-400 py-12 shadow-sm">
             No destination hospital assigned yet.
           </div>
         )}

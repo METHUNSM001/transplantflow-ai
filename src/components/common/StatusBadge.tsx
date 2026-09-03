@@ -9,82 +9,82 @@ interface BadgeProps {
 }
 
 export const StatusBadge: React.FC<BadgeProps> = ({ type, value, className = '' }) => {
-  let colorClasses = 'bg-slate-800 text-slate-300 border-slate-700';
-  let dotColor = 'bg-slate-400';
+  let colorClasses = 'bg-slate-100 text-slate-700 border-slate-200';
+  let dotColor = 'bg-slate-500';
   let label = value.replace(/_/g, ' ');
 
   if (type === 'safety') {
     const s = value as PreservationStatus;
     if (s === 'SAFE') {
-      colorClasses = 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30';
-      dotColor = 'bg-emerald-400';
+      colorClasses = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      dotColor = 'bg-emerald-500';
       label = '🟢 SAFE MARGIN';
     } else if (s === 'WARNING') {
-      colorClasses = 'bg-amber-500/15 text-amber-400 border-amber-500/30';
-      dotColor = 'bg-amber-400';
+      colorClasses = 'bg-amber-50 text-amber-700 border-amber-200';
+      dotColor = 'bg-amber-500';
       label = '🟠 WARNING';
     } else if (s === 'CRITICAL') {
-      colorClasses = 'bg-rose-500/20 text-rose-300 border-rose-500/40 animate-pulse';
-      dotColor = 'bg-rose-400';
+      colorClasses = 'bg-rose-50 text-rose-700 border-rose-200 animate-pulse';
+      dotColor = 'bg-rose-500';
       label = '🔴 CRITICAL';
     } else if (s === 'EXPIRED') {
-      colorClasses = 'bg-neutral-800 text-neutral-400 border-neutral-700';
-      dotColor = 'bg-neutral-500';
+      colorClasses = 'bg-slate-100 text-slate-600 border-slate-200';
+      dotColor = 'bg-slate-400';
       label = '⚫ EXPIRED';
     }
   } else if (type === 'risk' || type === 'severity') {
     const r = value as RiskLevel | AlertSeverity;
     if (r === 'LOW' || r === 'INFO') {
-      colorClasses = 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30';
-      dotColor = 'bg-emerald-400';
+      colorClasses = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      dotColor = 'bg-emerald-500';
     } else if (r === 'MEDIUM') {
-      colorClasses = 'bg-sky-500/15 text-sky-400 border-sky-500/30';
-      dotColor = 'bg-sky-400';
+      colorClasses = 'bg-blue-50 text-blue-700 border-blue-200';
+      dotColor = 'bg-blue-500';
     } else if (r === 'HIGH') {
-      colorClasses = 'bg-amber-500/15 text-amber-400 border-amber-500/30';
-      dotColor = 'bg-amber-400';
+      colorClasses = 'bg-amber-50 text-amber-700 border-amber-200';
+      dotColor = 'bg-amber-500';
     } else if (r === 'CRITICAL') {
-      colorClasses = 'bg-rose-500/20 text-rose-300 border-rose-500/40 animate-pulse';
-      dotColor = 'bg-rose-400';
+      colorClasses = 'bg-rose-50 text-rose-700 border-rose-200 animate-pulse';
+      dotColor = 'bg-rose-500';
     }
   } else if (type === 'status') {
     const st = value as OrganStatus;
     if (st === 'IN_TRANSIT') {
-      colorClasses = 'bg-cyan-500/15 text-cyan-300 border-cyan-500/30';
-      dotColor = 'bg-cyan-400 animate-ping';
+      colorClasses = 'bg-blue-50 text-blue-700 border-blue-200';
+      dotColor = 'bg-blue-600 animate-ping';
     } else if (st === 'AVAILABLE') {
-      colorClasses = 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30';
-      dotColor = 'bg-emerald-400';
+      colorClasses = 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      dotColor = 'bg-emerald-500';
     } else if (st === 'MATCHED') {
-      colorClasses = 'bg-purple-500/15 text-purple-300 border-purple-500/30';
-      dotColor = 'bg-purple-400';
+      colorClasses = 'bg-indigo-50 text-indigo-700 border-indigo-200';
+      dotColor = 'bg-indigo-500';
     } else if (st === 'ARRIVED' || st === 'TRANSPLANTED') {
-      colorClasses = 'bg-teal-500/15 text-teal-300 border-teal-500/30';
-      dotColor = 'bg-teal-400';
+      colorClasses = 'bg-teal-50 text-teal-700 border-teal-200';
+      dotColor = 'bg-teal-500';
     } else if (st === 'EXPIRED') {
-      colorClasses = 'bg-red-950/80 text-red-400 border-red-800';
-      dotColor = 'bg-red-600';
+      colorClasses = 'bg-red-50 text-red-700 border-red-200';
+      dotColor = 'bg-red-500';
     }
   } else if (type === 'urgency') {
     const u = value as UrgencyLevel;
     if (u === 'CRITICAL') {
-      colorClasses = 'bg-rose-500/20 text-rose-300 border-rose-500/40';
+      colorClasses = 'bg-rose-50 text-rose-700 border-rose-200 font-semibold';
       dotColor = 'bg-rose-500';
     } else if (u === 'HIGH') {
-      colorClasses = 'bg-amber-500/15 text-amber-400 border-amber-500/30';
-      dotColor = 'bg-amber-400';
+      colorClasses = 'bg-amber-50 text-amber-700 border-amber-200';
+      dotColor = 'bg-amber-500';
     } else if (u === 'MEDIUM') {
-      colorClasses = 'bg-blue-500/15 text-blue-300 border-blue-500/30';
-      dotColor = 'bg-blue-400';
+      colorClasses = 'bg-blue-50 text-blue-700 border-blue-200';
+      dotColor = 'bg-blue-500';
     } else {
-      colorClasses = 'bg-slate-800 text-slate-400 border-slate-700';
-      dotColor = 'bg-slate-500';
+      colorClasses = 'bg-slate-100 text-slate-600 border-slate-200';
+      dotColor = 'bg-slate-400';
     }
   }
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium border tracking-wide uppercase ${colorClasses} ${className}`}
+      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold border tracking-wide uppercase ${colorClasses} ${className}`}
     >
       <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`} />
       {label}

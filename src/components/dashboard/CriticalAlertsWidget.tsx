@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertCircle, AlertTriangle, Check, Clock, Eye } from 'lucide-react';
+import { AlertTriangle, Check } from 'lucide-react';
 import { localStore } from '../../lib/storage';
 import { Alert } from '../../types/database.types';
 import { StatusBadge } from '../common/StatusBadge';
@@ -21,10 +21,10 @@ export const CriticalAlertsWidget: React.FC<CriticalAlertsWidgetProps> = ({ aler
 
   if (activeAlerts.length === 0) {
     return (
-      <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 shadow-xl text-center py-8">
-        <Check className="w-8 h-8 text-emerald-400 mx-auto mb-2 opacity-80" />
-        <h4 className="text-sm font-bold text-white">All Clear — No Active Alerts</h4>
-        <p className="text-xs text-slate-400 mt-1">
+      <div className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-sm text-center py-8">
+        <Check className="w-8 h-8 text-emerald-600 mx-auto mb-2" />
+        <h4 className="text-sm font-bold text-slate-900">All Clear — No Active Alerts</h4>
+        <p className="text-xs text-slate-500 mt-1">
           All organ transit telemetry and hospital readiness metrics are within safe operational limits.
         </p>
       </div>
@@ -32,50 +32,50 @@ export const CriticalAlertsWidget: React.FC<CriticalAlertsWidgetProps> = ({ aler
   }
 
   return (
-    <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 shadow-xl space-y-3">
+    <div className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-sm space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <AlertTriangle className="w-5 h-5 text-rose-400 animate-pulse" />
-          <h4 className="text-sm font-bold text-white uppercase tracking-wide">
-            Critical Telemetry Alerts
+          <AlertTriangle className="w-5 h-5 text-red-600" />
+          <h4 className="text-sm font-bold text-slate-900">
+            Active Clinical Alerts
           </h4>
         </div>
         <a
           href="/alerts"
-          className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold transition"
+          className="text-xs text-blue-600 hover:text-blue-700 font-semibold transition"
         >
           View All ({alerts.length})
         </a>
       </div>
 
-      <div className="space-y-2.5">
+      <div className="space-y-3">
         {activeAlerts.map((alert) => (
           <div
             key={alert.id}
-            className={`p-3.5 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
+            className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 ${
               alert.severity === 'CRITICAL'
-                ? 'bg-rose-950/25 border-rose-500/40 shadow-rose-950/20'
-                : 'bg-amber-950/20 border-amber-500/30'
+                ? 'bg-red-50/50 border-red-200'
+                : 'bg-amber-50/50 border-amber-200'
             }`}
           >
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 <StatusBadge type="severity" value={alert.severity} />
-                <h5 className="font-bold text-xs text-slate-100">{alert.title}</h5>
+                <h5 className="font-bold text-xs text-slate-900">{alert.title}</h5>
               </div>
-              <p className="text-xs text-slate-300 line-clamp-1">{alert.message}</p>
+              <p className="text-xs text-slate-600 line-clamp-1">{alert.message}</p>
             </div>
 
             <div className="flex items-center gap-2 shrink-0">
               <button
                 onClick={() => handleAcknowledge(alert.id)}
-                className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold border border-slate-700 transition"
+                className="px-3 py-1.5 rounded-lg bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-300 transition shadow-sm"
               >
                 Acknowledge
               </button>
               <button
                 onClick={() => handleResolve(alert.id)}
-                className="px-2.5 py-1 rounded-lg bg-emerald-600/80 hover:bg-emerald-500 text-white text-xs font-semibold shadow transition"
+                className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition"
               >
                 Resolve
               </button>

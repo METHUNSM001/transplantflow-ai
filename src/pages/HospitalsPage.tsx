@@ -23,11 +23,11 @@ export const HospitalsPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
-          <Building2 className="w-6 h-6 text-emerald-400" />
+        <h2 className="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+          <Building2 className="w-6 h-6 text-blue-600" />
           Receiving Hospital Readiness Triage
         </h2>
-        <p className="text-xs text-slate-400 mt-1">
+        <p className="text-xs text-slate-500 mt-1">
           Real-time tracking of Operating Rooms, ICU beds, surgical staff, and blood bank preparedness.
           Decreased readiness immediately elevates cold-ischemia transit risk.
         </p>

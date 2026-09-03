@@ -11,7 +11,7 @@ export const MatchingPage: React.FC = () => {
   const [organs, setOrgans] = useState<Organ[]>([]);
   const [recipients, setRecipients] = useState<Recipient[]>([]);
   const [hospitals, setHospitals] = useState<Hospital[]>([]);
-  const [transports, setTransports] = useState<Transport[]>([]);
+  const [, setTransports] = useState<Transport[]>([]);
 
   const [selectedOrganId, setSelectedOrganId] = useState<string>('');
   const [weights, setWeights] = useState<MatchingWeights>(DEFAULT_MATCHING_WEIGHTS);
@@ -51,26 +51,26 @@ export const MatchingPage: React.FC = () => {
   return (
     <div className="space-y-6">
       {/* Top Selector Banner */}
-      <div className="bg-slate-900/90 rounded-xl p-5 border border-slate-800 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white rounded-xl p-6 border border-slate-200/90 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-black text-white tracking-tight">
+          <h2 className="text-xl font-extrabold text-slate-900 tracking-tight">
             Decision-Support Organ-Recipient Matching
           </h2>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 mt-1">
             Multi-criteria algorithmic ranking evaluating immunological compatibility, cold-ischemia
             feasibility, and clinical acuity.
           </p>
         </div>
 
         {/* Organ Selector Dropdown */}
-        <div className="flex items-center gap-2">
-          <label className="text-xs text-slate-300 font-semibold whitespace-nowrap">
+        <div className="flex items-center gap-2.5">
+          <label className="text-xs text-slate-700 font-bold whitespace-nowrap">
             Select Organ:
           </label>
           <select
             value={selectedOrganId}
             onChange={(e) => setSelectedOrganId(e.target.value)}
-            className="px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 text-xs text-white font-medium focus:outline-none focus:border-purple-500"
+            className="px-3.5 py-2 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-800 font-semibold focus:outline-none focus:border-blue-500 cursor-pointer"
           >
             {organs.map((o) => (
               <option key={o.id} value={o.id}>

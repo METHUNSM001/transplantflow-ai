@@ -22,79 +22,75 @@ export const KpiStats: React.FC<KpiStatsProps> = ({
     {
       title: 'Active Organs',
       value: activeOrgans,
-      subtext: 'Preservation clocks active',
+      subtext: 'Preservation active',
       icon: Layers,
-      color: 'text-cyan-400',
-      border: 'border-cyan-500/20',
-      bg: 'from-cyan-950/20 to-slate-900',
+      iconBg: 'bg-blue-50 text-blue-600',
+      valueColor: 'text-slate-900',
     },
     {
       title: 'Critical Margins',
       value: criticalOrgans,
-      subtext: '< 10 min buffer remaining',
+      subtext: '< 10 min buffer',
       icon: ShieldAlert,
-      color: criticalOrgans > 0 ? 'text-rose-400 animate-pulse' : 'text-slate-400',
-      border: criticalOrgans > 0 ? 'border-rose-500/40' : 'border-slate-800',
-      bg: criticalOrgans > 0 ? 'from-rose-950/40 to-slate-900' : 'from-slate-900 to-slate-950',
+      iconBg: criticalOrgans > 0 ? 'bg-red-50 text-red-600' : 'bg-slate-100 text-slate-500',
+      valueColor: criticalOrgans > 0 ? 'text-red-600 font-bold' : 'text-slate-900',
     },
     {
       title: 'In Transit',
       value: inTransit,
-      subtext: 'Live GPS telemetry pings',
+      subtext: 'Live GPS pings',
       icon: Navigation,
-      color: 'text-blue-400',
-      border: 'border-blue-500/20',
-      bg: 'from-blue-950/20 to-slate-900',
+      iconBg: 'bg-blue-50 text-blue-600',
+      valueColor: 'text-blue-700',
     },
     {
       title: 'High/Critical Risk',
       value: highRiskCount,
-      subtext: 'Composite risk score > 55%',
+      subtext: 'Risk score > 55%',
       icon: AlertOctagon,
-      color: highRiskCount > 0 ? 'text-amber-400' : 'text-slate-400',
-      border: highRiskCount > 0 ? 'border-amber-500/40' : 'border-slate-800',
-      bg: 'from-amber-950/20 to-slate-900',
+      iconBg: highRiskCount > 0 ? 'bg-amber-50 text-amber-600' : 'bg-slate-100 text-slate-500',
+      valueColor: highRiskCount > 0 ? 'text-amber-700' : 'text-slate-900',
     },
     {
-      title: 'Avg Hospital Readiness',
+      title: 'Avg Readiness',
       value: `${avgReadiness}%`,
-      subtext: 'OR / ICU / surgical prep',
+      subtext: 'OR / ICU readiness',
       icon: Building2,
-      color: 'text-emerald-400',
-      border: 'border-emerald-500/20',
-      bg: 'from-emerald-950/20 to-slate-900',
+      iconBg: 'bg-emerald-50 text-emerald-600',
+      valueColor: 'text-emerald-700',
     },
     {
       title: 'Active Alerts',
       value: activeAlerts,
-      subtext: 'Requires coordinator triage',
+      subtext: 'Requires triage',
       icon: Activity,
-      color: activeAlerts > 0 ? 'text-rose-400' : 'text-slate-400',
-      border: activeAlerts > 0 ? 'border-rose-500/30' : 'border-slate-800',
-      bg: 'from-rose-950/20 to-slate-900',
+      iconBg: activeAlerts > 0 ? 'bg-red-50 text-red-600' : 'bg-slate-100 text-slate-500',
+      valueColor: activeAlerts > 0 ? 'text-red-600' : 'text-slate-900',
     },
   ];
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
       {cards.map((card) => {
         const Icon = card.icon;
         return (
           <div
             key={card.title}
-            className={`p-4 rounded-xl border bg-gradient-to-br ${card.bg} ${card.border} shadow-lg flex flex-col justify-between`}
+            className="p-5 rounded-xl border border-slate-200/90 bg-white shadow-sm hover:shadow transition-shadow flex flex-col justify-between"
           >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
                 {card.title}
               </span>
-              <Icon className={`w-4 h-4 ${card.color}`} />
+              <div className={`p-2 rounded-lg ${card.iconBg}`}>
+                <Icon className="w-4 h-4" />
+              </div>
             </div>
             <div>
-              <div className={`text-2xl font-black font-mono tracking-tight ${card.color}`}>
+              <div className={`text-2xl font-extrabold tracking-tight ${card.valueColor}`}>
                 {card.value}
               </div>
-              <p className="text-[10px] text-slate-400 mt-0.5 line-clamp-1">
+              <p className="text-xs text-slate-400 mt-1 font-medium line-clamp-1">
                 {card.subtext}
               </p>
             </div>

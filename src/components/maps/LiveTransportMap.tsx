@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { MapContainer, Marker, Polyline, Popup, TileLayer, useMap } from 'react-leaflet';
-import { AlertTriangle, Clock, Gauge, Navigation, Pause, Play, ShieldAlert } from 'lucide-react';
+import { Clock, Gauge, Navigation, Pause, Play, ShieldAlert } from 'lucide-react';
 import { Hospital, Transport } from '../../types/database.types';
 import { localStore } from '../../lib/storage';
 import { StatusBadge } from '../common/StatusBadge';
@@ -104,46 +104,54 @@ export const LiveTransportMap: React.FC<LiveTransportMapProps> = ({
   return (
     <div className="flex flex-col gap-3">
       {/* Telemetry Status Bar */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-slate-900/90 border border-slate-800 p-3 rounded-xl text-xs">
-        <div className="flex items-center gap-2">
-          <Navigation className="w-4 h-4 text-cyan-400 shrink-0" />
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white border border-slate-200/90 p-4 rounded-xl shadow-sm text-xs">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-lg bg-blue-50 text-blue-600">
+            <Navigation className="w-4 h-4 shrink-0" />
+          </div>
           <div>
-            <span className="text-slate-400 block text-[10px] uppercase">Mode</span>
-            <span className="font-semibold text-white">{transport.transport_mode}</span>
+            <span className="text-slate-400 block text-[10px] font-bold uppercase tracking-wider">Transport Mode</span>
+            <span className="font-bold text-slate-900">{transport.transport_mode}</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <Clock className="w-4 h-4 text-emerald-400 shrink-0" />
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-lg bg-emerald-50 text-emerald-600">
+            <Clock className="w-4 h-4 shrink-0" />
+          </div>
           <div>
-            <span className="text-slate-400 block text-[10px] uppercase">ETA Window</span>
-            <span className="font-semibold text-white font-mono">
+            <span className="text-slate-400 block text-[10px] font-bold uppercase tracking-wider">Estimated Arrival</span>
+            <span className="font-bold text-slate-900 font-mono">
               {new Date(transport.eta).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <Gauge className="w-4 h-4 text-amber-400 shrink-0" />
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-lg bg-amber-50 text-amber-600">
+            <Gauge className="w-4 h-4 shrink-0" />
+          </div>
           <div>
-            <span className="text-slate-400 block text-[10px] uppercase">Delay</span>
-            <span className="font-semibold text-amber-300 font-mono">
+            <span className="text-slate-400 block text-[10px] font-bold uppercase tracking-wider">Active Delay</span>
+            <span className="font-bold text-amber-700 font-mono">
               {currentDelay > 0 ? `+${currentDelay} min` : 'Nominal (0m)'}
             </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          <ShieldAlert className="w-4 h-4 text-rose-400 shrink-0" />
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-lg bg-red-50 text-red-600">
+            <ShieldAlert className="w-4 h-4 shrink-0" />
+          </div>
           <div>
-            <span className="text-slate-400 block text-[10px] uppercase">Route Risk</span>
+            <span className="text-slate-400 block text-[10px] font-bold uppercase tracking-wider">Route Condition</span>
             <StatusBadge type="risk" value={transport.route_risk} />
           </div>
         </div>
       </div>
 
       {/* Map Canvas Container */}
-      <div className={`relative w-full ${heightClass} rounded-xl overflow-hidden border border-slate-800 shadow-xl`}>
+      <div className={`relative w-full ${heightClass} rounded-xl overflow-hidden border border-slate-200/90 shadow-sm`}>
         <MapContainer
           center={[centerLat, centerLon]}
           zoom={8}
@@ -152,17 +160,17 @@ export const LiveTransportMap: React.FC<LiveTransportMapProps> = ({
         >
           <ChangeView center={[centerLat, centerLon]} zoom={8} />
 
-          {/* CartoDB Dark Matter tiles */}
+          {/* CartoDB Positron light tiles */}
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/dark_all/{z}/{x}/{y}{r}.png"
+            url="https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png"
           />
 
           {/* Route Polyline */}
           <Polyline
             positions={polylineCoords}
             pathOptions={{
-              color: transport.route_risk === 'CRITICAL' ? '#f43f5e' : '#06b6d4',
+              color: transport.route_risk === 'CRITICAL' ? '#ef4444' : '#2563eb',
               weight: 4,
               dashArray: '8, 8',
               opacity: 0.85,
@@ -175,9 +183,9 @@ export const LiveTransportMap: React.FC<LiveTransportMapProps> = ({
             icon={createHospitalIcon(originHospital?.name || 'Origin Hospital', true)}
           >
             <Popup>
-              <div className="text-xs space-y-1">
-                <p className="font-bold text-cyan-400">{originHospital?.name || 'Donor Hospital'}</p>
-                <p className="text-slate-300">Retrieval & Dispatch Location</p>
+              <div className="text-xs space-y-1 p-1">
+                <p className="font-bold text-blue-700">{originHospital?.name || 'Donor Hospital'}</p>
+                <p className="text-slate-600">Retrieval & Dispatch Location</p>
                 <p className="text-slate-400">{originHospital?.city}, {originHospital?.state}</p>
               </div>
             </Popup>
@@ -189,9 +197,9 @@ export const LiveTransportMap: React.FC<LiveTransportMapProps> = ({
             icon={createHospitalIcon(destinationHospital?.name || 'Recipient Hospital', false)}
           >
             <Popup>
-              <div className="text-xs space-y-1">
-                <p className="font-bold text-emerald-400">{destinationHospital?.name || 'Transplant Center'}</p>
-                <p className="text-slate-300">Target Surgical Facility</p>
+              <div className="text-xs space-y-1 p-1">
+                <p className="font-bold text-emerald-700">{destinationHospital?.name || 'Transplant Center'}</p>
+                <p className="text-slate-600">Target Surgical Facility</p>
                 <p className="text-slate-400">Readiness: {destinationHospital?.readiness_score ?? 80}%</p>
               </div>
             </Popup>
@@ -203,9 +211,9 @@ export const LiveTransportMap: React.FC<LiveTransportMapProps> = ({
             icon={createVehicleIcon(transport.transport_mode)}
           >
             <Popup>
-              <div className="text-xs space-y-1">
-                <p className="font-bold text-white">{transport.transport_mode} Telemetry</p>
-                <p className="text-slate-300">Status: {transport.status}</p>
+              <div className="text-xs space-y-1 p-1">
+                <p className="font-bold text-slate-900">{transport.transport_mode} Telemetry</p>
+                <p className="text-slate-600">Status: {transport.status}</p>
                 <p className="text-slate-400">Lat: {currentPos[0].toFixed(4)}, Lon: {currentPos[1].toFixed(4)}</p>
               </div>
             </Popup>
@@ -214,26 +222,26 @@ export const LiveTransportMap: React.FC<LiveTransportMapProps> = ({
 
         {/* Floating Controls Overlay */}
         {allowSimulatedMovement && (
-          <div className="absolute bottom-4 right-4 z-[500] flex items-center gap-2 bg-slate-950/80 backdrop-blur-md p-2 rounded-xl border border-slate-800 shadow-xl">
+          <div className="absolute bottom-4 right-4 z-[500] flex items-center gap-3 bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl border border-slate-200/90 shadow-md">
             <button
               onClick={toggleMovement}
-              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-sm ${
                 isMoving
-                  ? 'bg-amber-600 hover:bg-amber-500 text-white'
-                  : 'bg-cyan-600 hover:bg-cyan-500 text-white shadow-md shadow-cyan-950'
+                  ? 'bg-amber-600 hover:bg-amber-700 text-white'
+                  : 'bg-blue-600 hover:bg-blue-700 text-white'
               }`}
             >
               {isMoving ? (
                 <>
-                  <Pause className="w-3.5 h-3.5" /> Pause Transit
+                  <Pause className="w-3.5 h-3.5 fill-current" /> Pause Transit
                 </>
               ) : (
                 <>
-                  <Play className="w-3.5 h-3.5" /> Start Simulation
+                  <Play className="w-3.5 h-3.5 fill-current" /> Start Simulation
                 </>
               )}
             </button>
-            <span className="text-[10px] font-mono text-slate-400 px-1">
+            <span className="text-[11px] font-mono text-slate-600 font-semibold px-1">
               {Math.round(progressRatio * 100)}% route complete
             </span>
           </div>

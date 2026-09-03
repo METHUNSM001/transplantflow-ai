@@ -5,10 +5,8 @@ import {
   AlertOctagon,
   BarChart3,
   Building2,
-  GitCompare,
   HeartHandshake,
   Layers,
-  MapPin,
   Navigation,
   Sliders,
   Users,
@@ -71,7 +69,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       label: 'Critical Alerts',
       icon: AlertOctagon,
       badge: activeAlertsCount,
-      badgeColor: 'bg-rose-500 text-white',
+      badgeColor: 'bg-red-500 text-white',
     },
     {
       to: '/recipients',
@@ -93,30 +91,30 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {isOpen && (
         <div
           onClick={onClose}
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-40 lg:hidden"
         />
       )}
 
       <aside
-        className={`fixed top-0 bottom-0 left-0 w-64 bg-slate-900 border-r border-slate-800/80 z-50 flex flex-col transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
+        className={`fixed top-0 bottom-0 left-0 w-64 bg-[#0c2340] text-slate-100 border-r border-blue-950 z-50 flex flex-col transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
           isOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         {/* Sidebar Header (Mobile close) */}
-        <div className="flex items-center justify-between p-4 border-b border-slate-800/80 lg:hidden">
-          <span className="font-bold text-slate-100 text-sm">Navigation</span>
+        <div className="flex items-center justify-between p-4 border-b border-blue-900/60 lg:hidden">
+          <span className="font-bold text-white text-sm">Clinical Navigation</span>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white"
+            className="p-1 rounded-lg text-blue-200 hover:text-white"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Navigation Links */}
-        <div className="flex-1 py-4 px-3 space-y-1 overflow-y-auto">
-          <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-            Operations Console
+        <div className="flex-1 py-5 px-3 space-y-1 overflow-y-auto">
+          <div className="px-3 pb-2.5 text-[11px] font-bold uppercase tracking-wider text-blue-300/80">
+            Clinical Operations
           </div>
 
           {navItems.map((item) => {
@@ -128,21 +126,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 onClick={onClose}
                 end={item.to === '/'}
                 className={({ isActive }) =>
-                  `flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-medium transition-all ${
+                  `flex items-center justify-between px-3.5 py-2.5 rounded-lg text-xs font-semibold transition-colors ${
                     isActive
-                      ? 'bg-gradient-to-r from-cyan-600/20 to-blue-600/10 text-cyan-300 border border-cyan-500/30 shadow-sm'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
+                      ? 'bg-blue-600 text-white shadow-sm'
+                      : 'text-blue-100/80 hover:text-white hover:bg-blue-900/60'
                   }`
                 }
               >
                 <div className="flex items-center gap-3">
-                  <Icon className="w-4 h-4 shrink-0 text-cyan-400" />
+                  <Icon className="w-4 h-4 shrink-0 text-blue-300" />
                   <span>{item.label}</span>
                 </div>
                 {item.badge !== null && item.badge !== undefined && (
                   <span
-                    className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
-                      item.badgeColor || 'bg-slate-800 text-cyan-400 border border-slate-700'
+                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      item.badgeColor || 'bg-blue-950/80 text-blue-200 border border-blue-800'
                     }`}
                   >
                     {item.badge}
@@ -154,26 +152,26 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Footer Database / System Connection Info */}
-        <div className="p-3 border-t border-slate-800/80 bg-slate-950/40 text-xs">
-          <div className="flex items-center justify-between mb-1.5">
-            <span className="text-slate-400 text-[11px]">Backend Sync</span>
+        <div className="p-4 border-t border-blue-900/60 bg-[#091b33] text-xs">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-blue-300/80 text-[11px] font-medium">Backend Sync</span>
             <span
-              className={`inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+              className={`inline-flex items-center gap-1.5 text-[10px] font-bold px-2 py-0.5 rounded-full ${
                 isSupabaseConfigured
-                  ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
-                  : 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
+                  ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                  : 'bg-blue-500/20 text-blue-200 border border-blue-500/30'
               }`}
             >
               <span
                 className={`w-1.5 h-1.5 rounded-full ${
-                  isSupabaseConfigured ? 'bg-emerald-400' : 'bg-cyan-400 animate-pulse'
+                  isSupabaseConfigured ? 'bg-emerald-400' : 'bg-blue-400 animate-pulse'
                 }`}
               />
               {isSupabaseConfigured ? 'Supabase Live' : 'Demo LocalDB'}
             </span>
           </div>
-          <p className="text-[10px] text-slate-400 leading-tight">
-            Predictive Cold-Ischemia Telemetry v2.4.0
+          <p className="text-[10px] text-blue-400/70 leading-tight">
+            TransplantFlow AI Platform v2.4
           </p>
         </div>
       </aside>
